@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 This is a fork of the DNSChef project v0.2.1 hosted at: http://thesprawl.org/projects/dnschef/
 Overview
 ========
@@ -77,3 +78,6 @@ DNSChef
 
 Lightweight DNS proxy written in python
 >>>>>>> 46de2a240b763a70b959d0095327ececd864bbfa
+=======
+ 
+>>>>>>> 4676516875cb1b9e3987025a41d891729fa284d1
