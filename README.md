@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 This is a fork of the DNSChef project v0.2.1 hosted at: http://thesprawl.org/projects/dnschef/
 Overview
 ========
@@ -70,3 +71,9 @@ NOTE: By default, DNSChef creates a UDP listener. You can use TCP instead with t
 
 
 For more documentation see project webpage: http://thesprawl.org/projects/dnschef/
+=======
+DNSChef
+=======
+
+Lightweight DNS proxy written in python
+>>>>>>> 46de2a240b763a70b959d0095327ececd864bbfa
