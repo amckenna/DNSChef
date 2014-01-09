@@ -1,11 +1,5 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-This is a fork of the DNSChef project v0.2.1 hosted at: http://thesprawl.org/projects/dnschef/
-=======
 This is a fork of the DNSChef project v0.2.1 hosted at: http://thesprawl.org/projects/dnschef/
 
->>>>>>> 4c32b2249d979838eebb021f036fa149244816d1
 Overview
 ========
 
