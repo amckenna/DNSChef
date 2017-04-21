@@ -1,6 +1,6 @@
 This is a fork of the DNSChef project v0.2.1 hosted at: http://thesprawl.org/projects/dnschef/
 
-##Overview
+## Overview
 
 DNSChef is a highly configurable DNS proxy for Penetration Testers and Malware Analysts. A DNS proxy (aka "Fake DNS") is a tool used for application network traffic analysis among other uses. For example, a DNS proxy can be used to fake requests for "badguy.com" to point to a local machine for termination or interception instead of a real host somewhere on the Internet.
 
@@ -12,7 +12,7 @@ Version 0.3 introduces support for more DNS record types, DNSSEC, logging, more 
 
 Version 0.2 introduces IPv6 support, large number of new DNS record types, custom ports and other frequently requested features.
 
-##Table of Contents
+## Table of Contents
 
 - Setting up a DNS Proxy
 - Installing DNSChef
@@ -26,7 +26,7 @@ Version 0.2 introduces IPv6 support, large number of new DNS record types, custo
 - Other configurations
 - Internal architecture
 
-##Setting up a DNS Proxy
+## Setting up a DNS Proxy
 
 Before you can start using DNSChef, you must configure your machine to use a DNS nameserver with the tool running on it. You have several options based on the operating system you are going to use:
 
@@ -40,7 +40,7 @@ If you do not have the ability to modify device's DNS settings manually, then yo
 
 At last you need to configure a fake service where DNSChef will point all of the requests. For example, if you are trying to intercept web traffic, you must bring up either a separate web server running on port 80 or set up a web proxy (e.g. Burp) to intercept traffic. DNSChef will point queries to your proxy/server host with properly configured services.
 
-##Installing DNSChef
+## Installing DNSChef
 
 DNSChef requires dnslib and IPy python libraries. You can obtain their latest versions here:
 
@@ -48,7 +48,7 @@ DNSChef requires dnslib and IPy python libraries. You can obtain their latest ve
 - IPy: https://github.com/haypo/python-ipy/wiki
 
 
-##Running DNSChef
+## Running DNSChef
 
 DNSChef is a cross-platform application developed in Python which should run on most platforms which have a Python interpreter. You can use the supplied dnschef.exe executable to run it on Windows hosts without installing a Python interpreter. This guide will concentrate on Unix environments; however, all of the examples below were tested to work on Windows as well.
 
@@ -105,7 +105,7 @@ DNSChef has full support for IPv6 which can be activated using -6 or --ipv6* fla
 NOTE: By default, DNSChef creates a UDP listener. You can use TCP instead with the --tcp argument discussed later.
 
 
-###Intercept All Responses
+### Intercept All Responses
 
 Now, that you know how to start DNSChef let's configure it to fake all replies to point to 127.0.0.1 using the --fakeip parameter:
 ```
@@ -196,7 +196,7 @@ google.com is an alias for www.fake.com.
 google.com name server ns.fake.com.
 ```
 
-###Filtering Domains
+### Filtering Domains
 
 Using the above example, consider you only want to intercept requests for thesprawl.org and leave queries to all other domains such as webfaction.com without modification. You can use the --fakedomains parameter as illustrated below:
 ```
@@ -211,7 +211,7 @@ From the above example the request for thesprawl.org was faked; however, the req
 
 NOTE: DNSChef will not verify whether the domain exists or not before faking the response. If you have specified a domain it will always resolve to a fake value whether it really exists or not.
 
-###Reverse Filtering
+### Reverse Filtering
 
 In another situation you may need to fake responses for all requests except a defined list of domains. You can accomplish this task using the --truedomains parameter as follows:
 ```
@@ -226,7 +226,7 @@ There are several things going on in the above example. First notice the use of 
 
 NOTE: Wildcards are position specific. A mask of type .thesprawl.org will match www.thesprawl.org but not www.test.thesprawl.org. However, a mask of type .*.thesprawl.org will match thesprawl.org, www.thesprawl.org and www.test.thesprawl.org.
 
-###External Definitions File
+### External Definitions File
 
 There may be situations where defining a single fake DNS record for all matching domains may not be sufficient. You can use an external file with a collection of DOMAIN=RECORD pairs defining exactly where you want the request to go.
 
@@ -291,7 +291,7 @@ Some records require exact formatting. Good examples are SOA, NAPTR, and SRV rec
 *.*.thesprawl.org=0 5 5060 sipserver.fake.com
 ```
 
-###Advanced Filtering
+### Advanced Filtering
 
 You can mix and match input from a file and command line. For example the following command uses both --file and --fakedomains parameters:
 ```
@@ -312,7 +312,7 @@ You can mix and match input from a file and command line. For example the follow
 Notice the definition for thesprawl.org in the command line parameter took precedence over dnschef.ini. This could be useful if you want to override values in the configuration file. slashdot.org still resolves to the fake IP address because it was specified in the --fakedomains parameter. tor.com request is simply proxied since it was not specified in either command line or the configuration file.
 See sample dnschef.ini file for additional examples.
 
-###Logging
+### Logging
 
 DNSChef is capable of storing activity log in an external file using the --logfile log1.txt command line parameter. Below is a snippet of a sample DNSChef session:
 ```
@@ -321,7 +321,7 @@ DNSChef is capable of storing activity log in an external file using the --logfi
 [05/Nov/2014:22:07:24 -0800] DNSChef is shutting down.
 ```
 
-##Other Configurations
+## Other Configurations
 
 For security reasons, DNSChef listens on a local 127.0.0.1 (or ::1 for IPv6) interface by default. You can make DNSChef listen on another interface using the --interface parameter:
 ```
@@ -387,7 +387,7 @@ DNS protocol can be used over UDP (default) or TCP. DNSChef implements a TCP mod
 [*] DNSChef is running in TCP mode
 ```
 
-##Internal Architecture
+## Internal Architecture
 Here is some information on the internals in case you need to adapt the tool for your needs. DNSChef is built on top of the SocketServer module and uses threading to help process multiple requests simultaneously. The tool is designed to listen on TCP or UDP ports (default is port 53) for incoming requests and forward those requests when necessary to a real DNS server over UDP.
 
 The excellent dnslib library is used to dissect and reassemble DNS packets. It is particularly useful when generating response packets based on queries. IPy is used for IPv6 addresses manipulation. Both libraries come bundled with DNSChef to ease installation.
